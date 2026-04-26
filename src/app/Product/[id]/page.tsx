@@ -6,7 +6,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { FaHeart, FaStar } from 'react-icons/fa6'
 import { MdOutlineElectricBolt } from 'react-icons/md'
 
-export default async function page({params}) {
+export default async function page({params}: { params: { id: string } } ) {
 
     const myParams = await params
     const singleProduct = await getProductById(myParams.id)
