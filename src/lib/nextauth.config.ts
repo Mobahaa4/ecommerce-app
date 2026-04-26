@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import "next-auth"
-import { email } from "zod"
+
 
 declare module "next-auth" {
     interface User {
@@ -23,8 +23,8 @@ export const nextAuthConfig : NextAuthOptions = {
             name : "fresh cart",
 
             credentials: {
-            email: {},
-            password: {}
+            email: { label: "Email", type: "text" },
+            password: { label: "Password", type: "password" }
             },
 
             async authorize(credentials){

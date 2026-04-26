@@ -10,7 +10,7 @@ export default async function middleware ( req : NextRequest ) {
         return NextResponse.next()
     }
 
-    return NextResponse.redirect("http://localhost:3000/login")   //full URL    
+    return NextResponse.redirect("https://ecommerce-app-1khw.vercel.app/login")   //full URL    
 }
 export const config = {
     matcher : ["/shop", "/brands"]

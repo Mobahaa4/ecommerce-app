@@ -4,7 +4,6 @@ import React, { useContext } from "react"
 import Link from "next/link"
 import {
     NavigationMenu,
-    NavigationMenuContent,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
