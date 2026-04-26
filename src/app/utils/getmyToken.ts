@@ -7,12 +7,11 @@ import { cookies } from 'next/headers'
 export default async  function getmyToken() {
 
     const myCokkies = await cookies()
-    const myTokenFromCokkies = myCokkies.get("next-auth.session-token")?.value
+    const myTokenFromCokkies = myCokkies.get("next-auth.session-token")?.value || myCokkies.get("__Secure-next-auth.session-token")?.value
     if(myTokenFromCokkies == null){
         return null
     }
     const myTokenAfterDecoded = await decode({token : myTokenFromCokkies, secret : process.env.NEXTAUTH_SECRET!})
-    if (!myTokenAfterDecoded) return null
-    return myTokenAfterDecoded.realtoken
+    return myTokenAfterDecoded?.realtoken
     
 }
