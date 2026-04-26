@@ -35,8 +35,6 @@ export default function page() {
             callbackUrl : "/",
             ...values      //important and it doesn't appear when ctrl+space (sending values with spread)
         })
-        router.push("/")
-        router.refresh()
 
     // const loginOk = await LoginAction(values)
 

@@ -1,6 +1,7 @@
 import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import "next-auth"
+import { email } from "zod"
 
 declare module "next-auth" {
     interface User {
@@ -22,7 +23,7 @@ export const nextAuthConfig : NextAuthOptions = {
             name : "fresh cart",
 
             credentials: {
-            username: {},
+            email: {},
             password: {}
             },
 
@@ -69,7 +70,9 @@ export const nextAuthConfig : NextAuthOptions = {
         },
 
         session({ session, token }) {
-            session.user.realTokenFromBackend = token.realtoken as string
+            if (session.user) {
+                session.user.realTokenFromBackend = token.realtoken as string
+            }
             return session
         },
 
