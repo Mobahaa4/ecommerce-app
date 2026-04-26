@@ -1,7 +1,8 @@
+import React from 'react'
 import { decode } from 'next-auth/jwt'
 import { cookies } from 'next/headers'
 
-import React from 'react'
+
 
 export default async  function getmyToken() {
 
@@ -11,6 +12,7 @@ export default async  function getmyToken() {
         return null
     }
     const myTokenAfterDecoded = await decode({token : myTokenFromCokkies, secret : process.env.NEXTAUTH_SECRET!})
+    if (!myTokenAfterDecoded) return null
     return myTokenAfterDecoded.realtoken
     
 }

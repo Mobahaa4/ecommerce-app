@@ -9,22 +9,35 @@ import { createCashOrder, createVisaOrder } from '../_actions/orders.Action'
 import { cartContext } from '../_contexts/CartContextProvider'
 import { toast } from 'sonner'
 
-
+type FormValues = {
+    details: string
+    phone: string
+    city: string
+    postalCode: string
+    type: "cash" | "visa"
+}
 export default  function page() {
 
-        const {cartId, setcartItemsNum, settotalPriceOfCart, setcartProducts} = useContext(cartContext)
+        const context = useContext(cartContext)
+    
+        if (!context) {
+        throw new Error("cartContext must be used inside provider")
+        }
+        
 
-        const form = useForm( {
+        const {cartId, setcartItemsNum, settotalPriceOfCart, setcartProducts} = context
+
+        const form = useForm<FormValues>( {
             defaultValues : {
                 details: "",
                 phone: "",
                 city: "",
                 postalCode: "",
-                type : ""
+                type : "cash"
             }
         })
 
-        async function handlePayment(values){
+        async function handlePayment(values : FormValues){
             const userData : shippingAddressType = {
                 shippingAddress : {
                     details : values.details,
@@ -36,9 +49,9 @@ export default  function page() {
 
             if(values.type == "cash"){
                 const cashRes = await createCashOrder(cartId, userData)
-                setcartItemsNum(null)
-                settotalPriceOfCart(null)
-                setcartProducts(null)
+                setcartItemsNum(0)
+                settotalPriceOfCart(0)
+                setcartProducts([])
                 if(cashRes.status == "success"){
                     toast.success(cashRes.message,{
                     position : "top-center"

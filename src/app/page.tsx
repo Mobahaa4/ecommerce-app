@@ -4,7 +4,6 @@ import { getAllProducts } from "../Services/Products";
 import Slider from "./_components/Slider";
 import homeSliderImage from "@/images/19b048dcec278f9d9c89514b670e0d9f8909f6dc.png"
 import { Oval } from "react-loader-spinner";
-import getmyToken from "./utils/getmyToken";
 const ShopByCategoryLazyComp = lazy( () => import("./_components/ShopByCategory") )
 
 

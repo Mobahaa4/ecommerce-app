@@ -1,7 +1,6 @@
-import { getAllCategories } from '@/Services/Categories';
-import { CategoryType } from '@/types/productTypes'
-import Link from 'next/link'
 import React from 'react'
+import { getAllCategories } from '@/Services/Categories';
+import Link from 'next/link'
 import { FaArrowRight } from 'react-icons/fa6'
 
 

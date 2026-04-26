@@ -1,6 +1,5 @@
 "use client"
 import React, { useContext, useState } from 'react'
-import { CiHeart } from 'react-icons/ci'
 import { addToWhishlist, getLoggedUserWhishlist } from '../_actions/whishlist.Actions'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
@@ -8,7 +7,14 @@ import { cartContext } from '../_contexts/CartContextProvider'
 import { FaHeart } from 'react-icons/fa6'
 
 export default function AddToWhishlistbtn({ productId }: { productId: string }) {
-    const {setwhishlistItemsNum, setwhishlistItems} = useContext(cartContext)
+
+    const context = useContext(cartContext)
+
+    if (!context) {
+    throw new Error("cartContext must be used inside provider")
+    }
+    const {setwhishlistItemsNum, setwhishlistItems} = context
+
     const [liked, setliked] = useState(false)
     
     async function handleAddToWhishlist(){

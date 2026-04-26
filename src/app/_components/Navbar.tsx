@@ -23,16 +23,20 @@ import { cartContext } from "../_contexts/CartContextProvider"
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
     export default function Navbar() {
         const session = useSession()
-        const {cartItemsNum, whishlistItemsNum} = useContext(cartContext)
+
+        const context = useContext(cartContext)
+    
+        if (!context) {
+        throw new Error("cartContext must be used inside provider")
+        }
+
+        const {cartItemsNum, whishlistItemsNum} = context
 
         function handelLogout(){
             signOut({

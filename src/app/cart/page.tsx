@@ -11,7 +11,14 @@ import { toast } from 'sonner';
 import { clearCart, deleteCartItem, updateCartItem } from '../_actions/cart.Action';
 
 export default function CartPage() {
-    const {cartItemsNum ,totalPriceOfCart, cartProducts, setcartItemsNum, settotalPriceOfCart, setcartProducts} = useContext(cartContext)
+
+    const context = useContext(cartContext)
+
+    if (!context) {
+    throw new Error("cartContext must be used inside provider")
+    }
+
+    const {cartItemsNum ,totalPriceOfCart, cartProducts, setcartItemsNum, settotalPriceOfCart, setcartProducts} = context
 
     async function handleDelete( id : string,){
         const deleteRes = await deleteCartItem( id )

@@ -10,8 +10,14 @@ import { toast } from 'sonner'
 import Link from 'next/link'
 
 export default function Wishlistpage() {
+    const context = useContext(cartContext)
 
-    const {whishlistItemsNum, setwhishlistItemsNum, whishlistItems, setwhishlistItems, setcartItemsNum, settotalPriceOfCart, setcartProducts } = useContext(cartContext)
+    if (!context) {
+    throw new Error("cartContext must be used inside provider")
+    }
+    
+
+    const {whishlistItemsNum, setwhishlistItemsNum, whishlistItems, setwhishlistItems, setcartItemsNum, settotalPriceOfCart, setcartProducts } = context
 
 
     async function handdleDeleteFromWhishlist(id : string){
