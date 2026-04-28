@@ -18,7 +18,7 @@ export async function createCashOrder(cartId : string, shippingAdress : shipping
 }
 export async function createVisaOrder(cartId : string, shippingAdress : shippingAddressType) {
     const Token = await getmyToken()
-    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://http://localhost:3000/`,{
+    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=https://http://ecommerce-app-tbci/`,{
         method : "POST",    
         headers : {
             token : Token as string,
