@@ -38,10 +38,14 @@ export const nextAuthConfig : NextAuthOptions = {
                 })
         
                 const finalRes = await res.json()
+
+                    if (!res.ok || !finalRes.user || !finalRes.token) {
+                        return null
+                    }
                 
                 if(finalRes.message === "success"){
                     return {
-                        id: finalRes.user.id,  
+                        id: finalRes.user._id,  
                         name : finalRes.user.name,
                         email : finalRes.user.email,
                         realTokenFromBackend : finalRes.token
@@ -64,14 +68,14 @@ export const nextAuthConfig : NextAuthOptions = {
 
         jwt({ token, user }) {
             if (user) {
-            token.realtoken = user.realTokenFromBackend
+            token.realTokenFromBackend = user.realTokenFromBackend
             }
             return token
         },
 
         session({ session, token }) {
             if (session.user) {
-                session.user.realTokenFromBackend = token.realtoken as string
+                session.user.realTokenFromBackend = token.realTokenFromBackend as string
             }
             return session
         },
