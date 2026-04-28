@@ -10,8 +10,8 @@ export default async function middleware ( req : NextRequest ) {
         return NextResponse.next()
     }
 
-    return NextResponse.redirect("https://ecommerce-app-1khw.vercel.app/login")   //full URL    
+    return NextResponse.redirect(new URL("/login", req.url))   //full URL    
 }
 export const config = {
-    matcher : ["/shop", "/brands"]
+    matcher : ["/cart", "/brands"]
 }
