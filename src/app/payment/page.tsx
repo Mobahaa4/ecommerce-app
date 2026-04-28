@@ -16,7 +16,7 @@ type FormValues = {
     postalCode: string
     type: "cash" | "visa"
 }
-export default  function page() {
+export default  function Page() {
 
         const context = useContext(cartContext)
     
@@ -156,7 +156,7 @@ export default  function page() {
 
                             <div className="flex-col gap-4">
 
-                                    <label className="flex my-2 w-full p-1.5 border-1 border-black items-center gap-2 rounded-lg">
+                                    <label className="flex my-2 w-full p-1.5 border border-black items-center gap-2 rounded-lg">
                                     <input
                                         type="radio"
                                         value="cash"
@@ -166,7 +166,7 @@ export default  function page() {
                                     Cash on Delivery
                                     </label>
 
-                                    <label className="flex w-full mt-2 p-1.5 border-1 border-black items-center gap-2 rounded-lg">
+                                    <label className="flex w-full mt-2 p-1.5 border border-black items-center gap-2 rounded-lg">
                                     <input
                                         type="radio"
                                         value="visa"

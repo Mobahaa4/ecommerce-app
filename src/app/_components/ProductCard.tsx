@@ -1,5 +1,4 @@
 import React from "react";
-import { CiHeart } from "react-icons/ci";
 import { TfiReload } from "react-icons/tfi";
 import { FaEye, FaStar } from "react-icons/fa6";
 import { ProductType } from "../../types/productTypes";
@@ -15,16 +14,16 @@ interface ProductTypeProps {
 
 export default function ProductCard({ product }: ProductTypeProps) {
   return (
-    <div className="bg-white p-3 rounded-xl border-1 relative">
+    <div className="bg-white p-3 rounded-xl border relative">
       <div className="absolute top-4 right-1 gap-2 flex flex-col">
 
         <AddToWhishlistbtn productId={product.id}/>
 
-        <Button className="bg-white shadow-2xl border-1 text-gray-700 h-8 w-8 rounded-full cursor-pointer flex items-center justify-center hover:text-emerald-500 transition duration-300">
+        <Button className="bg-white shadow-2xl border text-gray-700 h-8 w-8 rounded-full cursor-pointer flex items-center justify-center hover:text-emerald-500 transition duration-300">
           <TfiReload/>
         </Button>
 
-        <Link href={`/Product/${product.id}`} className="bg-white shadow-2xl border-1 text-gray-700 h-8 w-8 rounded-full cursor-pointer flex items-center justify-center hover:text-emerald-500 transition duration-300">
+        <Link href={`/Product/${product.id}`} className="bg-white shadow-2xl border text-gray-700 h-8 w-8 rounded-full cursor-pointer flex items-center justify-center hover:text-emerald-500 transition duration-300">
           <FaEye/>
         </Link>
 

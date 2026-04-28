@@ -7,7 +7,6 @@ import {
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
-    NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import logo from "@/images/freshCart.png"
@@ -25,6 +24,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { MdKeyboardArrowDown } from "react-icons/md"
+import Image from "next/image"
 
     export default function Navbar() {
         const session = useSession()
@@ -52,12 +53,12 @@ import {
 
 
             <div>
-                <img src={logo.src} alt="freshCart Logo"/>
+                <Image width={200} height={200} src={logo.src} alt="freshCart Logo"/>
             </div>
 
             <div className="w-1/2  flex justify-between items-center relative">
-                <input type="text" className="border-1 border-gray-200 w-full pt-3 pe-12 ps-5 pb-3  rounded-3xl " placeholder="Search for products, brands and more..." />
-                <button className="bg-emerald-600 text-white absolute right-1 w-8 h-8 rounded-full text-center flex justify-center items-center cursor-pointer"> <IoIosSearch className="h-3.5 w-3.5" /> </button>
+                <input type="text" className="border border-gray-200 w-full pt-3 pe-12 ps-5 pb-3  rounded-3xl " placeholder="Search for products, brands and more..." />
+                <Button className="bg-emerald-600 text-white absolute right-1 w-8 h-8 rounded-full text-center flex justify-center items-center cursor-pointer"> <IoIosSearch className="h-3.5 w-3.5" /> </Button>
             </div>
 
         <NavigationMenuList className="w-full flex justify-between items-center">
@@ -78,9 +79,7 @@ import {
                     <DropdownMenu>
 
                         <DropdownMenuTrigger asChild>
-                            <NavigationMenuTrigger>
-                                <Button variant="outline" className="bg-transparent border-0 p-0 hover:bg-transparent focus:bg-transparent ring-0  active:bg-transparent">Categories</Button>
-                            </NavigationMenuTrigger>
+                                <Button variant="outline" className="bg-transparent border-0 p-0 hover:bg-transparent focus:bg-transparent ring-0  active:bg-transparent">Categories <MdKeyboardArrowDown /> </Button>
                         </DropdownMenuTrigger>
 
                         <DropdownMenuContent className="w-40">
@@ -91,9 +90,9 @@ import {
 
                             <DropdownMenuItem className=" hover:bg-green-100 hover:text-emerald-600  text-gray-500 text-md">Electronics</DropdownMenuItem>
 
-                            <DropdownMenuItem className=" hover:bg-green-100 hover:text-emerald-600  text-gray-500 text-md">Women's Fashion</DropdownMenuItem>
+                            <DropdownMenuItem className=" hover:bg-green-100 hover:text-emerald-600  text-gray-500 text-md">Women&apos;s Fashion</DropdownMenuItem>
  
-                            <DropdownMenuItem className=" hover:bg-green-100 hover:text-emerald-600  text-gray-500 text-md">Men's Fashion</DropdownMenuItem>
+                            <DropdownMenuItem className=" hover:bg-green-100 hover:text-emerald-600  text-gray-500 text-md">Men&apos;s Fashion</DropdownMenuItem>
 
                             <DropdownMenuItem className=" hover:bg-green-100 hover:text-emerald-600  text-gray-500 text-md">Beauty & Health</DropdownMenuItem>
 
@@ -204,23 +203,3 @@ import {
     
     }
 
-    function ListItem({
-    title,
-    children,
-    href,
-    ...props
-    }: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
-    return (
-        <li {...props}>
-        <NavigationMenuLink asChild>
-            <Link href={href}>
-            <div className="flex flex-col gap-1 text-sm">
-                <div className="leading-none font-medium">{title}</div>
-                <div className="line-clamp-2 text-muted-foreground">{children}</div>
-            </div>
-            </Link>
-        </NavigationMenuLink>
-        </li>
-    )
-    
-}
