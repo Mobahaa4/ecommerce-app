@@ -6,7 +6,6 @@ import { FaArrowRight } from 'react-icons/fa6'
 
 export default async function ShopByCategory() {
     const Categories = await getAllCategories();
-    console.log(Categories)
     return (
         <div className="container mx-auto md:px-20">
 

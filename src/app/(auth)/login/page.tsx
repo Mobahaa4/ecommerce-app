@@ -6,7 +6,6 @@ import { Controller, useForm } from 'react-hook-form'
 import { loginDataType,  LoginSchema} from './Login.schema' 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
 import {signIn} from "next-auth/react"
 import Image from 'next/image'
 import grocery from "@/images/grocery.png"
@@ -17,8 +16,8 @@ import { FaShieldAlt } from 'react-icons/fa'
 
 
 
-export default function page() {
-    const router = useRouter()
+export default function Page() {
+    // const router = useRouter()
 
     const form = useForm( {
         defaultValues : {
@@ -33,7 +32,8 @@ export default function page() {
         signIn("credentials",{
             redirect : true,
             callbackUrl : "/",
-            ...values      //important and it doesn't appear when ctrl+space (sending values with spread)
+            email: values.email,
+            password: values.password    //important and it doesn't appear when ctrl+space (sending values with spread)
         })
 
     // const loginOk = await LoginAction(values)

@@ -41,7 +41,7 @@ export const nextAuthConfig : NextAuthOptions = {
                 
                 if(finalRes.message === "success"){
                     return {
-                        id: finalRes.user._id,  
+                        id: finalRes.user.id,  
                         name : finalRes.user.name,
                         email : finalRes.user.email,
                         realTokenFromBackend : finalRes.token

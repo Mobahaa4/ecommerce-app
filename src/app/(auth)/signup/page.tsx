@@ -15,7 +15,7 @@ import grocery from "@/images/grocery.png"
 import Image from 'next/image'
 
 
-export default function page() {
+export default function Page() {
     const router = useRouter()
 
     const form = useForm( {
@@ -166,7 +166,7 @@ export default function page() {
                         {...field}
                         id={field.name}
                         aria-invalid={fieldState.invalid}
-                        placeholder="Enter Your Email"
+                        placeholder="Enter Your Password"
                         autoComplete="off"
                         className="px-3 py-3 text-xs"
                     />
