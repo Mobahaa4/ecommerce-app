@@ -1,6 +1,30 @@
 import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import NextAuth, { DefaultSession } from "next-auth"
+import { JWT } from "next-auth/jwt"
 import "next-auth"
+
+
+
+declare module "next-auth" {
+
+    interface User {
+        realtokenfrombackend: string
+    }
+
+    interface Session {
+        user: {
+        realtoken: string
+        } & DefaultSession["user"]
+    }
+    }
+
+    declare module "next-auth/jwt" {
+
+    interface JWT {
+        realtoken: string
+    }
+}
 
 export const nextAuthConfig : NextAuthOptions = {
     providers : [
@@ -23,6 +47,7 @@ export const nextAuthConfig : NextAuthOptions = {
                 })
         
                 const finalRes = await res.json()
+                console.log( finalRes )
 
                 
                 if(finalRes.message === "success"){
@@ -30,7 +55,7 @@ export const nextAuthConfig : NextAuthOptions = {
                         id: finalRes.user._id,  
                         name : finalRes.user.name,
                         email : finalRes.user.email,
-                        realTokenFromBackend : finalRes.token
+                        realtokenfrombackend : finalRes.token
                     }
                 }
 
@@ -63,16 +88,30 @@ export const nextAuthConfig : NextAuthOptions = {
         //     return session
         // }
 
-        jwt(params) {
-            if(params.user){
-                params.token.realtoken = params.session.user.realtokenfrombackend
-            }
-            console.log("jwt", params)
-            return params.token
+        // jwt(params) {
+        //     if(params.user){
+        //         params.token.realtoken = params.user.realtokenfrombackend
+        //     }
+        //     console.log("jwt", params)
+        //     console.log("jwt2", params.user)
+        //     console.log("jwt3", params.token.realtoken)
+        //     return params.token
+        // },
+        jwt({ token, user }) {
+
+        console.log("USER:", user)
+
+        if (user) {
+            token.realtoken = user.realtokenfrombackend
+        }
+
+        console.log("TOKEN:", token)
+
+        return token
         },
         session(params) {
             console.log("session", params)
-            console.log("ParamsSession", params.session )
+
             return params.session   //don't return the token
         },
     },
