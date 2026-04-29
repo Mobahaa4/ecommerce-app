@@ -79,7 +79,7 @@ export default function CartPage() {
                 </p>
                 <div className="flex flex-col lg:flex-row gap-6 items-start">
                     <div className='flex-1 flex flex-col gap-3 min-w-0 w-full lg:w-80 '>
-                        {cartProducts.map( (item : cartItemType) =>      
+                        {cartProducts?.map( (item : cartItemType) =>      
                         <>  
                         <div key={item.product.id} className="bg-white border border-gray-200 rounded-xl p-4 flex gap-5">
                             

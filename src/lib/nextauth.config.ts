@@ -2,21 +2,6 @@ import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import "next-auth"
 
-
-declare module "next-auth" {
-    interface User {
-        id: string
-        realTokenFromBackend: string
-    }
-
-    interface Session {
-        user: {
-        name: string
-        email: string
-        realTokenFromBackend: string
-        }
-    }
-}
 export const nextAuthConfig : NextAuthOptions = {
     providers : [
         CredentialsProvider({
@@ -39,9 +24,6 @@ export const nextAuthConfig : NextAuthOptions = {
         
                 const finalRes = await res.json()
 
-                    if (!res.ok || !finalRes.user || !finalRes.token) {
-                        return null
-                    }
                 
                 if(finalRes.message === "success"){
                     return {
@@ -66,30 +48,33 @@ export const nextAuthConfig : NextAuthOptions = {
     },
     callbacks : {
 
-        jwt({ token, user }) {
-            if (user) {
-            token.realTokenFromBackend = user.realTokenFromBackend
-            }
-            return token
-        },
 
-        session({ session, token }) {
-            if (session.user) {
-                session.user.realTokenFromBackend = token.realTokenFromBackend as string
-            }
-            return session
-        },
-
-        // jwt({params}) {
-        //     if(params.user){
-        //         params.token.realtoken = params.user.realTokenFromBackend
+        // jwt({ token, user }) {
+        //     if (user) {
+        //     token.realToken = user.realTokenFromBackend
         //     }
-            
-        //     return params.token
+        //     return token
         // },
-        // session(params) {
-        //     return params.session   //don't return the token
-        // },
+
+        // session({ session, token }) {
+        //     if (session.user) {
+        //         session.user.realToken = token.realTokenFromBackend as string
+        //     }
+        //     return session
+        // }
+
+        jwt(params) {
+            if(params.user){
+                params.token.realtoken = params.session.user.realtokenfrombackend
+            }
+            console.log("jwt", params)
+            return params.token
+        },
+        session(params) {
+            console.log("session", params)
+            console.log("ParamsSession", params.session )
+            return params.session   //don't return the token
+        },
     },
     session : {
         maxAge : 60 * 60 * 24
