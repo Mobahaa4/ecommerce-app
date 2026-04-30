@@ -42,7 +42,6 @@ export const nextAuthConfig : NextAuthOptions = {
                 })
         
                 const finalRes = await res.json()
-                console.log( finalRes )
 
                 
                 if(res.ok && finalRes.token && finalRes.user){
@@ -76,7 +75,7 @@ export const nextAuthConfig : NextAuthOptions = {
         },
 
         session(params) {
-
+            params.session.user.realtokenfrombackend = params.token.realtokenfrombackend
             return params.session   //don't return the token
         },
     },
