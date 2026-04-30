@@ -7,7 +7,7 @@ import { cookies } from 'next/headers'
 export default async  function getmyToken() {
 
     const myCokkies = await cookies()
-    const myTokenFromCokkies = myCokkies.get("next-auth.session-token")?.value || myCokkies.get("__Secure-next-auth.session-token")?.value
+    const myTokenFromCokkies = myCokkies.get("next-auth.session-token")?.value
     if(myTokenFromCokkies == null){
         return null
     }

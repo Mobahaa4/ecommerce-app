@@ -1,3 +1,4 @@
+
 import type { DefaultSession, NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import "next-auth"
@@ -44,7 +45,7 @@ export const nextAuthConfig : NextAuthOptions = {
                 console.log( finalRes )
 
                 
-                if(finalRes.message === "success" && res.ok){
+                if(res.ok && finalRes.token && finalRes.user){
                     return {
                         id: finalRes.user._id,  
                         name : finalRes.user.name,
@@ -67,21 +68,6 @@ export const nextAuthConfig : NextAuthOptions = {
     },
     callbacks : {
 
-
-        // jwt({ token, user }) {
-        //     if (user) {
-        //     token.realToken = user.realTokenFromBackend
-        //     }
-        //     return token
-        // },
-
-        // session({ session, token }) {
-        //     if (session.user) {
-        //         session.user.realToken = token.realTokenFromBackend as string
-        //     }
-        //     return session
-        // }
-
         jwt(params) {
             if(params.user){
                 params.token.realtoken = params.user.realtokenfrombackend
@@ -90,6 +76,7 @@ export const nextAuthConfig : NextAuthOptions = {
         },
 
         session(params) {
+
             return params.session   //don't return the token
         },
     },
