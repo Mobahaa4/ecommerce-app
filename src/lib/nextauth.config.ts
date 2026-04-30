@@ -44,7 +44,7 @@ export const nextAuthConfig : NextAuthOptions = {
                 console.log( finalRes )
 
                 
-                if(finalRes.message === "success"){
+                if(finalRes.message === "success" && res.ok){
                     return {
                         id: finalRes.user._id,  
                         name : finalRes.user.name,
