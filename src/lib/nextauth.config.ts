@@ -1,6 +1,24 @@
-import type { NextAuthOptions } from "next-auth"
+import type { DefaultSession, NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import "next-auth"
+
+declare module "next-auth" {
+    interface User {
+        realtokenfrombackend: string
+    }
+
+    interface Session {
+        user: {
+        realtokenfrombackend: string
+        } & DefaultSession["user"]
+    }
+    }
+
+    declare module "next-auth/jwt" {
+    interface JWT {
+        realtokenfrombackend: string
+    }
+}
 
 export const nextAuthConfig : NextAuthOptions = {
     providers : [
@@ -64,30 +82,14 @@ export const nextAuthConfig : NextAuthOptions = {
         //     return session
         // }
 
-        // jwt(params) {
-        //     if(params.user){
-        //         params.token.realtoken = params.user.realtokenfrombackend
-        //     }
-        //     console.log("jwt", params)
-        //     console.log("jwt2", params.user)
-        //     console.log("jwt3", params.token.realtoken)
-        //     return params.token
-        // },
-        jwt({ token, user }) {
-
-        console.log("USER:", user)
-
-        if (user) {
-            token.realtoken = user.realtokenfrombackend
-        }
-
-        console.log("TOKEN:", token)
-
-        return token
+        jwt(params) {
+            if(params.user){
+                params.token.realtoken = params.user.realtokenfrombackend
+            }
+            return params.token
         },
-        session(params) {
-            console.log("session", params)
 
+        session(params) {
             return params.session   //don't return the token
         },
     },
