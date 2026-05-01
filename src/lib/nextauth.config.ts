@@ -1,25 +1,8 @@
 
-import type { DefaultSession, NextAuthOptions } from "next-auth"
+import type { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import {jwtDecode} from "jwt-decode"
 import "next-auth"
-
-declare module "next-auth" {
-    interface User {
-        realtokenfrombackend: string
-    }
-
-    interface Session {
-        user: {
-        realtokenfrombackend: string
-        } & DefaultSession["user"]
-    }
-    }
-
-    declare module "next-auth/jwt" {
-    interface JWT {
-        realtokenfrombackend: string
-    }
-}
 
 export const nextAuthConfig : NextAuthOptions = {
     providers : [
@@ -43,20 +26,24 @@ export const nextAuthConfig : NextAuthOptions = {
         
                 const finalRes = await res.json()
 
-                
-                if(res.ok && finalRes.token && finalRes.user){
+                const jwt : {id : string} = jwtDecode( finalRes.token )
+
+
+                if(res.ok){
                     return {
-                        id: finalRes.user._id,  
+                        id: jwt.id,  
                         name : finalRes.user.name,
                         email : finalRes.user.email,
                         realtokenfrombackend : finalRes.token
                     }
                 }
 
-                return null
+                throw new Error( finalRes.message || "can't login" )
+
                 
                 } catch ( error ) {
-                    return null
+                    console.log("authorize error", error)
+                    throw new Error( (error as Error).message || "can't login" )
                 }
             },
         })
@@ -70,13 +57,14 @@ export const nextAuthConfig : NextAuthOptions = {
         jwt(params) {
             if(params.user){
                 params.token.realtoken = params.user.realtokenfrombackend
+                params.token.id = params.user.id
             }
             return params.token
         },
 
-        session(params) {
-            params.session.user.realtokenfrombackend = params.token.realtokenfrombackend
-            return params.session   //don't return the token
+        session({token, session}) {
+            session.id = token.id
+            return session   //don't return the realtoken because it is accessed by client
         },
     },
     session : {
