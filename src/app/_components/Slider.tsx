@@ -1,10 +1,8 @@
 "use client"
+import Image from 'next/image';
 import React from 'react'
 import { Navigation, Pagination} from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 
 interface MySliderPropsType {
@@ -25,7 +23,7 @@ export default function Slider({listOfImages, spaceBetween = 100, slidesPerView 
             {listOfImages.map( (image,index) => 
                 <SwiperSlide key={index}> 
                     <div className='w-full h-100 relative'>
-                        <img  src={image} className='w-full h-100 object-cover' alt="Home Image" /> 
+                        <Image width={200} height={200}  src={image} className='w-full h-100 object-cover' alt="Home Image" /> 
                         <div className='absolute inset-0 bg-emerald-400/50'></div>
                     </div>
                 </SwiperSlide> 

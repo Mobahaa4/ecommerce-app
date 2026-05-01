@@ -63,12 +63,16 @@ export const nextAuthConfig : NextAuthOptions = {
         },
 
         session({token, session}) {
+            if (session.user) {
+                session.user.name = token.name as string
+                session.user.email = token.email as string
+            }
             session.id = token.id
             return session   //don't return the realtoken because it is accessed by client
         },
     },
     session : {
-        maxAge : 60 * 60
+        maxAge : 60 * 60 * 24
     }
     
     

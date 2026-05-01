@@ -17,8 +17,6 @@ export default async function page() {
 
                         <p className='text-center mt-5 font-bold'> {brand.name} </p>
 
-
-
                     </div>
             
             )}

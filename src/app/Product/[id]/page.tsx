@@ -13,10 +13,10 @@ export default async function page({params}: { params: { id: string } } ) {
     
     return (
         <div className='container mx-auto mt-5 md:grid md:grid-cols-4 lg:grid-cols-4 gap-10'>
-            <div className=' md:col-span-1 p-4 border-1 md:mb-0 rounded-xl mb-3'>
+            <div className=' md:col-span-1 p-4 border md:mb-0 rounded-xl mb-3'>
                 <img className='w-full' src={singleProduct?.imageCover} alt={singleProduct?.title} />
             </div>
-            <div className='md:col-span-3 p-4 border-1 rounded-xl'>
+            <div className='md:col-span-3 p-4 border rounded-xl'>
                 <div className='flex gap-2'>
                     <span className='text-xs p-2 text-emerald-700 bg-emerald-100 rounded-3xl'>{singleProduct?.category.name}</span>
                     <span className='text-xs p-2 text-black bg-gray-100 rounded-3xl'>{singleProduct?.brand.name}</span>
