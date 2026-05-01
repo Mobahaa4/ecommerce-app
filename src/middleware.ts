@@ -1,10 +1,11 @@
+import React from 'react'
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
-import React from 'react'
+import getmyToken from './app/utils/getmyToken'
 
 export default async function middleware ( req : NextRequest ) {
 
-    const jwt = await getToken( {req} )
+    const jwt = await getmyToken( )
 
     if (jwt){
         return NextResponse.next()
