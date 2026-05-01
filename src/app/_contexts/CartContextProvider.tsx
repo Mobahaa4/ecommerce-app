@@ -1,7 +1,6 @@
 "use client";
 
-import React, { createContext, ReactNode, useEffect, useState } from "react";
-import { getLoggedUser } from "../_actions/cart.Action";
+import React, { createContext, ReactNode, useState } from "react";
 import { cartItemType, cartResType } from "@/types/cart.type";
 import { UserWhishlistResType, whishlistItemType } from "@/types/whishlist.type";
 
@@ -27,7 +26,7 @@ type CartContextType = {
 export const cartContext = createContext<CartContextType | null> (null)
 export default function CartContextProvider( {children , userCart, userWishlist }: {children: ReactNode , userCart : cartResType, userWishlist : UserWhishlistResType}) {
     
-    const [cartId, setcartId] = useState<string>(userCart?.cartId)
+    const [cartId] = useState<string>(userCart?.cartId)
     const [cartItemsNum, setcartItemsNum] = useState<number>(userCart?.numOfCartItems);
     const [totalPriceOfCart, settotalPriceOfCart] = useState<number>(userCart?.data?.totalCartPrice);
     const [cartProducts, setcartProducts] = useState<cartItemType[]>(userCart?.data?.products);

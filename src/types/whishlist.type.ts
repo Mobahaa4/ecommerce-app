@@ -11,5 +11,5 @@ export interface whishlistItemType{
     imageCover : string,
     price : number,
     title : string,
-    id : string
+    _id : string
 }

@@ -1,5 +1,5 @@
 export interface ProductType {
-    id : string,
+    _id : string,
     title : string,
     imageCover : string,
     description : string,
@@ -12,13 +12,13 @@ export interface ProductType {
 }
 
 export interface CategoryType {
-    id : string,
+    _id : string,
     name : string,
     slug : string,
     image : string
 }
 export interface BrandType {
-    id : string,
+    _id : string,
     name : string,
     slug : string,
     image : string

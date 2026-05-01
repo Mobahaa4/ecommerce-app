@@ -9,6 +9,7 @@ import { cartContext } from '../_contexts/CartContextProvider';
 import { cartItemType } from '@/types/cart.type';
 import { toast } from 'sonner';
 import { clearCart, deleteCartItem, updateCartItem } from '../_actions/cart.Action';
+import Image from 'next/image';
 
 export default function CartPage() {
 
@@ -54,7 +55,6 @@ export default function CartPage() {
 
     async function handleClearCart() {
         const clearRes = await clearCart()
-        console.log(clearRes)
         if (clearRes.status == "success"){
             setcartItemsNum(clearRes.numOfCartItems)
             settotalPriceOfCart(clearRes.data.totalCartPrice)
@@ -81,9 +81,9 @@ export default function CartPage() {
                     <div className='flex-1 flex flex-col gap-3 min-w-0 w-full lg:w-80 '>
                         {cartProducts?.map( (item : cartItemType) =>      
                         <>  
-                        <div key={item.product.id} className="bg-white border border-gray-200 rounded-xl p-4 flex gap-5">
+                        <div key={item.product._id} className="bg-white border border-gray-200 rounded-xl p-4 flex gap-5">
                             
-                            <img src={item.product.imageCover} alt={item.product.title} className='h-30 w-30 object-center object-cover' />
+                            <Image width={120} height={120} src={item.product.imageCover} alt={item.product.title} className='h-30 w-30 object-center object-cover' />
 
                             <div className="flex-1 flex flex-col gap-2">
                                 <p className="text-sm font-semibold text-gray-900">{item.product.title}</p>
@@ -95,16 +95,16 @@ export default function CartPage() {
 
                                 <div className="flex items-center justify-between flex-wrap gap-2">
                                     <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                                        <Button className="w-8 h-8 text-xs bg-white flex items-center justify-center text-gray-600 hover:bg-gray-100 cursor-pointer" onClick={() => handleUpdate( item.product.id, item.count - 1)}> < FaMinus/> </Button>
+                                        <Button className="w-8 h-8 text-xs bg-white flex items-center justify-center text-gray-600 hover:bg-gray-100 cursor-pointer" onClick={() => handleUpdate( item.product._id, item.count - 1)}> < FaMinus/> </Button>
                                         <span className="w-9 h-8 flex items-center justify-center text-sm font-semibold border-x border-gray-200 text-gray-900">{item.count}</span>
-                                        <Button className="w-8 h-8 text-xs bg-white flex items-center justify-center text-gray-600 hover:bg-gray-100 cursor-pointer" onClick={() => handleUpdate( item.product.id, item.count + 1)}> <FaPlus/> </Button>
+                                        <Button className="w-8 h-8 text-xs bg-white flex items-center justify-center text-gray-600 hover:bg-gray-100 cursor-pointer" onClick={() => handleUpdate( item.product._id, item.count + 1)}> <FaPlus/> </Button>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <div className="text-right">
                                         <p className="text-xs text-gray-400">Total</p>
                                         <p className="text-sm font-semibold text-gray-900">{item.price * item.count}</p>
                                         </div>
-                                        <Button className="w-8 h-8 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-center cursor-pointer " onClick={ () => handleDelete(item.product.id) }>
+                                        <Button className="w-8 h-8 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-center cursor-pointer " onClick={ () => handleDelete(item.product._id) }>
                                             <FaRegTrashAlt className='text-red-600' />
                                         </Button>
                                     </div>

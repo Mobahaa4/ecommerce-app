@@ -6,6 +6,7 @@ import Link from "next/link";
 import AddToCartbtn from "./AddToCartbtn";
 import AddToWhishlistbtn from "./AddToWhishlistbtn";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 
 interface ProductTypeProps {
@@ -17,19 +18,19 @@ export default function ProductCard({ product }: ProductTypeProps) {
     <div className="bg-white p-3 rounded-xl border relative">
       <div className="absolute top-4 right-1 gap-2 flex flex-col">
 
-        <AddToWhishlistbtn productId={product.id}/>
+        <AddToWhishlistbtn productId={product._id}/>
 
         <Button className="bg-white shadow-2xl border text-gray-700 h-8 w-8 rounded-full cursor-pointer flex items-center justify-center hover:text-emerald-500 transition duration-300">
           <TfiReload/>
         </Button>
 
-        <Link href={`/Product/${product.id}`} className="bg-white shadow-2xl border text-gray-700 h-8 w-8 rounded-full cursor-pointer flex items-center justify-center hover:text-emerald-500 transition duration-300">
+        <Link href={`/Product/${product._id}`} className="bg-white shadow-2xl border text-gray-700 h-8 w-8 rounded-full cursor-pointer flex items-center justify-center hover:text-emerald-500 transition duration-300">
           <FaEye/>
         </Link>
 
       </div>
 
-      <img src={product.imageCover} alt={product.title} className="w-full" />
+      <Image width={200} height={200} src={product.imageCover} alt={product.title} className="w-full" />
       <p className="text-gray-500 text-xs font-medium mt-3">
         {product.category.name}
       </p>
@@ -67,7 +68,7 @@ export default function ProductCard({ product }: ProductTypeProps) {
         ) : (
           <h4 className="text-xl font-extrabold mt-3">{product.price} EGP</h4>
         )}
-        <AddToCartbtn productId={product.id}/>
+        <AddToCartbtn productId={product._id}/>
       </div>
     </div>
   );

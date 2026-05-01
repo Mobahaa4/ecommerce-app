@@ -8,6 +8,7 @@ import { addProductToCart } from '../_actions/cart.Action'
 import { DeleteFromWhishlist, getLoggedUserWhishlist } from '../_actions/whishlist.Actions'
 import { toast } from 'sonner'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Wishlistpage() {
     const context = useContext(cartContext)
@@ -23,6 +24,8 @@ export default function Wishlistpage() {
     async function handdleDeleteFromWhishlist(id : string){
         const deleteRes = await DeleteFromWhishlist(id)
         const whishlist = await getLoggedUserWhishlist()
+    
+        
         if (deleteRes.status == "success"){
             setwhishlistItems(whishlist.data)
             setwhishlistItemsNum(whishlist.count)
@@ -39,6 +42,7 @@ export default function Wishlistpage() {
 
     async function handleAddToCartFromWhishlist(id : string) {
         const res = await addProductToCart(id)
+        console.log(res)
         if (res.status == "success"){
 
             toast.success(`${res.message}`,{
@@ -61,11 +65,11 @@ export default function Wishlistpage() {
     <div className='min-h-screen bg-gray-100'>
         {whishlistItems?.map(  (item : whishlistItemType) => 
         
-            <div key={item.id} className='flex flex-col p-3 h-70 w-8/12 mx-auto  my-3 '>
+            <div key={item._id} className='flex flex-col p-3 h-70 w-8/12 mx-auto  my-3 '>
 
                 <div className=" bg-white border-2 border-gray-100 rounded-xl p-5 md:flex gap-5">
                     
-                    <img src={item.imageCover} alt={item.title} className='md:h-50 md:w-40 w-full object-cover' />
+                    <Image width={160} height={200} src={item.imageCover} alt={item.title} className='md:h-50 md:w-40 w-full object-cover' />
 
                     <div className="flex-1 flex flex-col gap-3 min-w-0 mt-3 md:mt-0 px-2 md:px-0">
                         <p className="text-sm font-semibold text-gray-900"> {item.title} </p>
@@ -76,11 +80,11 @@ export default function Wishlistpage() {
                         <p className="text-sm font-semibold text-gray-900"> {item.price} <span className="text-xs font-normal text-gray-400">per unit</span></p>
 
                         <div className="flex items-center gap-3 my-1.5">
-                                <Button className="h-8  bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg flex items-center justify-center w-1/2 cursor-pointer" onClick={ () => handleAddToCartFromWhishlist(item.id) } >
+                                <Button className="h-8  bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg flex items-center justify-center w-1/2 cursor-pointer" onClick={ () => handleAddToCartFromWhishlist(item._id) } >
                                     <FaShoppingCart /> Add to Cart 
                                 </Button>
 
-                                <Button className="h-8 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-center w-1/2 cursor-pointer" onClick={ () => handdleDeleteFromWhishlist(item.id) } >
+                                <Button className="h-8 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-center w-1/2 cursor-pointer" onClick={ () => handdleDeleteFromWhishlist(item._id) } >
                                     <FaRegTrashAlt className='text-red-600' /> 
                                 </Button>
                         </div>

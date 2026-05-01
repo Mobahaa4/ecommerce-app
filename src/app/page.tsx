@@ -38,7 +38,7 @@ export default async function Home() {
 
         <div className="container mx-auto grid lg:grid-cols-5 md:grid-cols-4 gap-5 ">
           {products?.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product._id} product={product} />
           ))}
         </div>
       </div>
