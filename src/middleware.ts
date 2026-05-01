@@ -1,18 +1,44 @@
 import React from 'react'
 import { getToken } from "next-auth/jwt"
 import { NextRequest, NextResponse } from "next/server"
-import getmyToken from './app/utils/getmyToken'
 
-export default async function middleware ( req : NextRequest ) {
 
-    const jwt = await getmyToken( )
+export default async function middleware ( request : NextRequest ) {
+    const protectedRoutes = ["/cart", "/brands", "/wishlist", "/payment"]
+    const authRoutes = ["/login", "/signup"]
 
-    if (jwt){
-        return NextResponse.next()
+    //1)getPathname
+    const  myPath = request.nextUrl.pathname;
+
+    //1)getToken
+    const jwt = await getToken( {
+        req : request,
+        secret : process.env.NEXTAUTH_SECRET,
+        secureCookie : process.env.NODE_ENV == "production"
+    }
+    
+    )
+    const token = jwt?.realtoken;
+
+    if (!token && protectedRoutes.some( (path) => myPath.startsWith(path) )){
+        return NextResponse.redirect(new URL("/login", request.url))   //full URL    
     }
 
-    return NextResponse.redirect(new URL("/login", req.url))   //full URL    
+    if (token && authRoutes.some( (path) => myPath.startsWith(path) )){
+        return NextResponse.redirect(new URL("/", request.url))   //full URL    
+    }
+    
+    return NextResponse.next()
+    
 }
+// when we go to peoxy and when we don't
 export const config = {
-    matcher : ["/cart", "/brands"]
+    matcher : [
+        "/cart/:path*",
+        "/brands/:path*",
+        "/payment/:path*",
+        "/whislist/:path*",
+        "/login",
+        "/signup"
+    ],
 }
