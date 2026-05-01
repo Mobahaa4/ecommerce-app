@@ -34,10 +34,8 @@ export default async function middleware ( request : NextRequest ) {
 // when we go to peoxy and when we don't
 export const config = {
     matcher : [
-        "/cart/:path*",
         "/brands/:path*",
         "/payment/:path*",
-        "/whislist/:path*",
         "/login",
         "/signup"
     ],
