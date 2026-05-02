@@ -5,6 +5,7 @@ import {jwtDecode} from "jwt-decode"
 import "next-auth"
 
 export const nextAuthConfig : NextAuthOptions = {
+    secret: process.env.NEXTAUTH_SECRET,
     providers : [
         CredentialsProvider({
             name : "fresh cart",
