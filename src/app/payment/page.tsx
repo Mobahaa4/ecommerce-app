@@ -70,7 +70,7 @@ export default  function Page() {
         }
     return (
         <>
-        <div className='h-screen p-5 w-6/12 mx-auto rounded-xl '>
+        <div className='md:h-screen p-5 md:w-6/12 mx-auto rounded-xl '>
             <h1 className='text-5xl text-center my-2 mx-auto'>Payment</h1>
             <form onSubmit={form.handleSubmit(handlePayment)}>
 

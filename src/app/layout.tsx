@@ -7,6 +7,7 @@ import MySessionProvider from "./_providers/MySessionProvider";
 import CartContextProvider from "./_contexts/CartContextProvider";
 import { getLoggedUser } from "./_actions/cart.Action";
 import { getLoggedUserWhishlist } from "./_actions/whishlist.Actions";
+import Footer from "./_components/Footer";
 
 
 
@@ -48,6 +49,7 @@ export default async function RootLayout({
           <Toaster/>
           <Navbar/>
           {children}
+          <Footer/>
         </>
 
       </CartContextProvider>

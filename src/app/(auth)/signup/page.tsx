@@ -62,7 +62,7 @@ export default function Page() {
     return (
         <>
 
-        <div className="flex flex-col md:flex-row min-h-screen overflow-hidden px-20 gap-5  bg-white">
+        <div className="flex flex-col md:flex-row md:min-h-screen my-10 overflow-hidden md:px-20 gap-5  bg-white">
 
         <div className="hidden md:flex flex-1 flex-col items-center justify-center bg-gray-50 px-6">
             <div className="bg-white p-2 mb-5 rounded-xl">
@@ -85,13 +85,12 @@ export default function Page() {
         <div className="flex flex-1 items-center justify-center bg-white px-6">
             <div className="w-full">
 
-            <p className="text-lg font-bold text-center mb-1">
+            <p className="text-2xl font-bold text-center mb-1">
                 <span className="text-emerald-600">Fresh</span>
                 <span className="text-gray-900">Cart</span>
             </p>
-            <p className="text-lg font-bold text-gray-900 text-center mb-1">Welcome Back!</p>
             <p className="text-xs text-gray-500 text-center mb-5">
-                Sign in to continue your fresh shopping experience
+                Sign up to continue your fresh shopping experience
             </p>
 
 

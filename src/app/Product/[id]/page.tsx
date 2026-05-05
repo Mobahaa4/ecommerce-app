@@ -61,7 +61,7 @@ export default async function page({params}: { params: { id: string } } ) {
                 </div>
 
                 <div className='flex justify-center items-center gap-3'>
-                    <Button className='flex items-center w-10/12 md:w-11/12 text-lg py-4 md:py-6 mt-6 font-medium text-black bg-white border-gray-200 border-1'> <FaHeart /> Add to Whislist</Button>
+                    <Button className='flex items-center w-10/12 md:w-11/12 text-lg py-4 md:py-6 mt-6 font-medium text-black bg-white border-gray-200 border'> <FaHeart /> Add to Whislist</Button>
                     <Button className='flex items-center w-2/12 md:w-1/12 text-lg py-4 md:py-6 mt-6 font-medium text-white'> <MdOutlineElectricBolt /> </Button>
                 </div>
 

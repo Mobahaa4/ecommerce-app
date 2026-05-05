@@ -56,7 +56,7 @@ export default function Page() {
 
     return (
         <>
-    <div className="flex flex-col md:flex-row min-h-screen overflow-hidden px-20 gap-5  bg-white">
+    <div className="flex flex-col md:flex-row md:min-h-screen my-10 overflow-hidden md:px-20 gap-5  bg-white">
 
       <div className="hidden md:flex flex-1 flex-col items-center justify-center bg-gray-50 px-6">
         <div className="bg-white p-2 mb-5 rounded-xl">
@@ -79,11 +79,11 @@ export default function Page() {
       <div className="flex flex-1 items-center justify-center bg-white px-6">
         <div className="w-full">
 
-          <p className="text-lg font-bold text-center mb-1">
+          <p className="text-3xl font-bold text-center mb-1">
             <span className="text-emerald-600">Fresh</span>
             <span className="text-gray-900">Cart</span>
           </p>
-          <p className="text-lg font-bold text-gray-900 text-center mb-1">Welcome Back!</p>
+          <p className="text-md font-bold text-gray-900 text-center mb-1">Welcome Back!</p>
           <p className="text-xs text-gray-500 text-center mb-5">
             Sign in to continue your fresh shopping experience
           </p>
@@ -109,7 +109,7 @@ export default function Page() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} className="mb-3">
-                  <FieldLabel htmlFor={field.name} className="block text-xs font-semibold text-gray-700 mb-1.5">
+                  <FieldLabel htmlFor={field.name} className="block text-sm font-semibold text-gray-700 mb-1.5">
                     Email Address
                   </FieldLabel>
                   <Input
@@ -118,7 +118,7 @@ export default function Page() {
                     aria-invalid={fieldState.invalid}
                     placeholder="Enter Your Email"
                     autoComplete="off"
-                    className="px-3 py-3 text-xs"
+                    className="px-3 py-3 text-lg"
                   />
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 
@@ -133,10 +133,10 @@ export default function Page() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid} className="mb-3">
                   <div className="flex justify-between items-center mb-1.5">
-                    <FieldLabel htmlFor={field.name} className="text-xs font-semibold text-gray-700">
+                    <FieldLabel htmlFor={field.name} className="text-sm font-semibold text-gray-700">
                       Password
                     </FieldLabel>
-                    <a href="#" className="text-xs text-emerald-600 hover:underline">Forgot Password?</a>
+                    <a href="#" className="text-sm text-emerald-600 hover:underline">Forgot Password?</a>
                   </div>
                   <Input
                     {...field}
@@ -145,7 +145,7 @@ export default function Page() {
                     placeholder="Enter Your password"
                     autoComplete="off"
                     type="password"
-                    className="w-full px-3 py-2.5 text-xs text-gray-900 rounded-lg border outline-none transition-all duration-150 bg-white placeholder:text-gray-400"
+                    className="w-full px-3 py-2.5 text-lg text-gray-900 rounded-lg border outline-none transition-all duration-150 bg-white placeholder:text-gray-400"
                   />
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                 </Field>
