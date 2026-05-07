@@ -168,6 +168,7 @@ export default function Page() {
                         placeholder="Enter Your Password"
                         autoComplete="off"
                         className="px-3 py-3 text-xs"
+                        type='password'
                     />
                     {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
 
@@ -215,7 +216,7 @@ export default function Page() {
                         aria-invalid={fieldState.invalid}
                         placeholder="Enter yout Phone"
                         autoComplete="off"
-                        type="password"
+                        type="text"
                         className="w-full px-3 py-2.5 text-xs text-gray-900 rounded-lg border outline-none transition-all duration-150 bg-white placeholder:text-gray-400"
                     />
                     {fieldState.invalid && <FieldError errors={[fieldState.error]} />}

@@ -21,12 +21,13 @@ type CartContextType = {
     setwhishlistItems: React.Dispatch<React.SetStateAction<whishlistItemType[]>>
 
     cartId: string
+    setcartId: React.Dispatch<React.SetStateAction<string>>
 }
 
 export const cartContext = createContext<CartContextType | null> (null)
 export default function CartContextProvider( {children , userCart, userWishlist }: {children: ReactNode , userCart : cartResType, userWishlist : UserWhishlistResType}) {
     
-    const [cartId] = useState<string>(userCart?.cartId)
+    const [cartId, setcartId] = useState<string>(userCart?.cartId ?? "")
     const [cartItemsNum, setcartItemsNum] = useState<number>(userCart?.numOfCartItems);
     const [totalPriceOfCart, settotalPriceOfCart] = useState<number>(userCart?.data?.totalCartPrice);
     const [cartProducts, setcartProducts] = useState<cartItemType[]>(userCart?.data?.products);
@@ -47,7 +48,7 @@ export default function CartContextProvider( {children , userCart, userWishlist 
     // }, []);
     
     return (
-        <cartContext.Provider value={{ cartItemsNum, setcartItemsNum, totalPriceOfCart, settotalPriceOfCart, cartProducts, setcartProducts, cartId, whishlistItemsNum, setwhishlistItemsNum, whishlistItems, setwhishlistItems }}>
+        <cartContext.Provider value={{ cartItemsNum, setcartItemsNum, totalPriceOfCart, settotalPriceOfCart, cartProducts, setcartProducts, cartId, setcartId, whishlistItemsNum, setwhishlistItemsNum, whishlistItems, setwhishlistItems }}>
         {children}
         </cartContext.Provider>
     );

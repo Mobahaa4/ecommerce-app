@@ -19,7 +19,7 @@ export default function CartPage() {
     throw new Error("cartContext must be used inside provider")
     }
 
-    const {cartItemsNum ,totalPriceOfCart, cartProducts, setcartItemsNum, settotalPriceOfCart, setcartProducts} = context
+    const {cartItemsNum ,totalPriceOfCart, cartProducts, setcartItemsNum, settotalPriceOfCart, setcartProducts, setcartId} = context
 
     async function handleDelete( id : string,){
         const deleteRes = await deleteCartItem( id )
@@ -59,6 +59,7 @@ export default function CartPage() {
             setcartItemsNum(clearRes.numOfCartItems)
             settotalPriceOfCart(clearRes.data.totalCartPrice)
             setcartProducts(clearRes.data.products)
+            setcartId("")
             toast.success(`${clearRes.message}`,{
                 position : "top-center"
             })

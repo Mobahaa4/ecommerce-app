@@ -8,6 +8,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { createCashOrder, createVisaOrder } from '../_actions/orders.Action'
 import { cartContext } from '../_contexts/CartContextProvider'
 import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 
 type FormValues = {
     details: string
@@ -19,13 +20,14 @@ type FormValues = {
 export default  function Page() {
 
         const context = useContext(cartContext)
+        const router = useRouter()
     
         if (!context) {
         throw new Error("cartContext must be used inside provider")
         }
         
 
-        const {cartId, setcartItemsNum, settotalPriceOfCart, setcartProducts} = context
+        const {cartId, setcartId, cartItemsNum, setcartItemsNum, settotalPriceOfCart, setcartProducts} = context
 
         const form = useForm<FormValues>( {
             defaultValues : {
@@ -38,6 +40,12 @@ export default  function Page() {
         })
 
         async function handlePayment(values : FormValues){
+            if (!cartId || cartItemsNum <= 0) {
+                toast.error("Your cart is empty. Add products before checkout.", { position: "top-center" })
+                router.push("/cart")
+                return
+            }
+
             const userData : shippingAddressType = {
                 shippingAddress : {
                     details : values.details,
@@ -49,10 +57,11 @@ export default  function Page() {
 
             if(values.type == "cash"){
                 const cashRes = await createCashOrder(cartId, userData)
-                setcartItemsNum(0)
-                settotalPriceOfCart(0)
-                setcartProducts([])
                 if(cashRes.status == "success"){
+                    setcartItemsNum(0)
+                    settotalPriceOfCart(0)
+                    setcartProducts([])
+                    setcartId("")
                     toast.success(cashRes.message,{
                     position : "top-center"
                     })
@@ -64,7 +73,15 @@ export default  function Page() {
             } else if(values.type == "visa"){
                 const visaRes = await createVisaOrder(cartId, userData)
                 console.log(visaRes)
-                window.open(visaRes.session.url, "_blank")
+                const checkoutUrl = visaRes?.session?.url
+                if (!checkoutUrl) {
+                    toast.error(visaRes?.message ?? "Checkout failed. Please try again.", { position: "top-center" })
+                    if ((visaRes?.message as string | undefined)?.toLowerCase?.().includes("no cart")) {
+                        router.push("/cart")
+                    }
+                    return
+                }
+                window.open(checkoutUrl, "_blank")
             }
 
         }

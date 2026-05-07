@@ -13,7 +13,7 @@ export default function AddToCartbtn({ productId }: { productId: string }) {
     throw new Error("No cartContext")
   }
 
-const { setcartItemsNum, settotalPriceOfCart, setcartProducts } = context
+const { setcartItemsNum, settotalPriceOfCart, setcartProducts, setcartId } = context
 
   async function handleAddToCart() {
     const res = await addProductToCart(productId);
@@ -24,6 +24,7 @@ const { setcartItemsNum, settotalPriceOfCart, setcartProducts } = context
       setcartItemsNum(res.numOfCartItems);
       settotalPriceOfCart(res.data.totalCartPrice);
       setcartProducts(res.data.products);
+      if (res.cartId) setcartId(res.cartId)
       
 
     } else {
