@@ -72,7 +72,6 @@ export default  function Page() {
                 }
             } else if(values.type == "visa"){
                 const visaRes = await createVisaOrder(cartId, userData)
-                console.log(visaRes)
                 const checkoutUrl = visaRes?.session?.url
                 if (!checkoutUrl) {
                     toast.error(visaRes?.message ?? "Checkout failed. Please try again.", { position: "top-center" })
