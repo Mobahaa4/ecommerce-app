@@ -75,7 +75,7 @@ export default function CartPage() {
     
         {cartItemsNum > 0 ?
 
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-[60vh] bg-gray-100">
             <div className="max-w-6xl mx-auto px-4 py-6">
 
                 <p className="text-sm text-gray-500 mb-5">

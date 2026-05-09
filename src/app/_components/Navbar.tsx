@@ -40,7 +40,6 @@ import { Separator } from "@/components/ui/separator"
 
     export default function Navbar() {
         const session = useSession()
-        console.log(session)
 
         const context = useContext(cartContext)
     

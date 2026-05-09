@@ -66,7 +66,7 @@ export default function Wishlistpage() {
 
     {whishlistItemsNum > 0 ?
     
-        <div className='min-h-screen bg-gray-100'>
+        <div className='min-h-[60vh] bg-gray-100'>
             {whishlistItems?.map(  (item : whishlistItemType) => 
             
                 <div key={item._id} className='flex flex-col p-3 h-70 w-8/12 mx-auto  my-3 '>

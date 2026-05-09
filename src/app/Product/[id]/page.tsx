@@ -1,5 +1,6 @@
 
 import AddToCartbtnFromProductPage from '@/app/_components/AddToCartbtnFromProductPage'
+import AddToWhishlistbtnFromProductPage from '@/app/_components/AddToWishlistbtnFromProductPage'
 import { Button } from '@/components/ui/button'
 import { getProductById } from '@/Services/Products'
 import React from 'react'
@@ -11,8 +12,7 @@ export default async function page({params}: { params: { id: string } } ) {
 
     const myParams = await params
     const singleProduct = await getProductById(myParams.id)
-    console.log(singleProduct)
-    
+
     return (
         <div className='container mx-auto mt-5 md:grid md:grid-cols-4 lg:grid-cols-4 gap-10'>
             <div className=' md:col-span-1 p-4 border md:mb-0 rounded-xl mb-3'>
@@ -67,9 +67,9 @@ export default async function page({params}: { params: { id: string } } ) {
 
                 <div className='flex justify-center items-center gap-3'>
                     {singleProduct?._id && (
-                        <AddToCartbtnFromProductPage productId={singleProduct?._id} />
+                        <AddToWhishlistbtnFromProductPage productId={singleProduct?._id} />
                     )}
-                    <Button className='flex items-center w-2/12 md:w-1/12 text-lg p-5 mt-6 font-medium text-gray-900 cursor-pointer bg-white border border-gray-400'> 
+                    <Button className='flex items-center w-1/12 md:w-1/12 text-lg p-5 mt-6 font-medium text-gray-900 cursor-pointer bg-white border border-gray-400'> 
                     <IoShareSocial /> </Button>
                 </div>
 
