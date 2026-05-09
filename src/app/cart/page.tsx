@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import React, { useContext } from 'react'
-import { FaLongArrowAltLeft, FaRegTrashAlt } from 'react-icons/fa';
+import { FaLongArrowAltLeft, FaLongArrowAltRight, FaRegTrashAlt } from 'react-icons/fa';
 import { FaCartShopping, FaMinus, FaPlus, FaShield } from 'react-icons/fa6';
 import { MdLocalShipping } from 'react-icons/md';
 import { cartContext } from '../_contexts/CartContextProvider';
@@ -10,6 +10,7 @@ import { cartItemType } from '@/types/cart.type';
 import { toast } from 'sonner';
 import { clearCart, deleteCartItem, updateCartItem } from '../_actions/cart.Action';
 import Image from 'next/image';
+import { BsBoxSeamFill } from "react-icons/bs";
 
 export default function CartPage() {
 
@@ -70,13 +71,16 @@ export default function CartPage() {
         }
     }
 
-    return (
+    return <>
+    
+        {cartItemsNum > 0 ?
+
         <div className="min-h-screen bg-gray-100">
             <div className="max-w-6xl mx-auto px-4 py-6">
 
                 <p className="text-sm text-gray-500 mb-5">
-                {cartItemsNum > 0 ? 
-                <> You have <span className="text-green-700 font-semibold"> {cartItemsNum} items </span> in your cart </> : "" }
+
+                <> You have <span className="text-green-700 font-semibold"> {cartItemsNum} items </span> in your cart </> 
                 </p>
                 <div className="flex flex-col lg:flex-row gap-6 items-start">
                     <div className='flex-1 flex flex-col gap-3 min-w-0 w-full lg:w-80 '>
@@ -114,14 +118,14 @@ export default function CartPage() {
                         </div>
 
                         </>)}
-                        {cartItemsNum > 0 ?
+
                         <>
                         <div className='flex justify-between items-center'>
                             <Link href="/" className='text-violet-500 flex items-center gap-1' > <FaLongArrowAltLeft />Continue Shopping</Link>
                             <Button className='text-red-600 bg-transparent flex items-center border border-red-400 p-3 rounded-md cursor-pointer' onClick={ () => handleClearCart() } ><FaRegTrashAlt />Clear Cart</Button>
-                        </div> </> : ""}
+                        </div> </> 
                     </div>
-                    {cartItemsNum > 0 ?
+
                     <>
                     <div className="w-full lg:w-80  bg-white border border-gray-200 rounded-xl overflow-hidden lg:top-6">
 
@@ -198,11 +202,32 @@ export default function CartPage() {
 
                         </div>
                     </div>
-                    </> : ""}
+                    </> 
                 </div>
 
             </div>
+        </div> 
+
+        : 
+        <div className='flex justify-center items-center'>
+            <div className=' flex flex-col items-center justify-center text-center max-w-md min-h-[60vh] '>
+                <div className='flex text-center items-center justify-center mb-6'>
+                    <div className='bg-gray-50 flex justify-center items-center rounded-full w-35 h-35'>
+                        <BsBoxSeamFill className='text-4xl text-gray-300' />
+                    </div>
+                </div>
+                    <p className='text-2xl font-bold mb-2'>Your Cart is Empty</p>
+                    <p className='text-md text-gray-500 mb-5'>Looks like you haven&apos;t added anything to your cart yet.Start exploring our products!</p>
+
+                    <Link href="/" className='text-white text-xl font-bold flex items-center gap-1.5 justify-center mt-5 p-3 rounded-xl w-1/2 bg-green-400 transition duration-200 hover:bg-green-700'>
+                        Start Shopping <FaLongArrowAltRight />
+                    </Link>
+            </div>
         </div>
-    );
+        
+        }
+    
+    </>
+    
 }
 

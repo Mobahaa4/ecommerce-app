@@ -76,9 +76,7 @@ export default  function Page() {
                 const checkoutUrl = visaRes?.session?.url
                 if (!checkoutUrl) {
                     toast.error(visaRes?.message ?? "Checkout failed. Please try again.", { position: "top-center" })
-                    if ((visaRes?.message as string | undefined)?.toLowerCase?.().includes("no cart")) {
-                        router.push("/cart")
-                    }
+                    router.push("/cart")
                     return
                 }
                 window.open(checkoutUrl, "_blank")

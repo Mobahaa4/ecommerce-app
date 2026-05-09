@@ -26,7 +26,6 @@ const { setcartItemsNum, settotalPriceOfCart, setcartProducts, setcartId } = con
       setcartProducts(res.data.products);
       if (res.cartId) setcartId(res.cartId)
       
-
     } else {
       toast.error(res.message, {
         position: "top-center",

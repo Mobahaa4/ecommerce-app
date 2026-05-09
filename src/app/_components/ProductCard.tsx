@@ -15,7 +15,7 @@ interface ProductTypeProps {
 
 export default function ProductCard({ product }: ProductTypeProps) {
   return (
-    <div className="bg-white p-3 rounded-xl border relative">
+    <div className="bg-white p-3 rounded-xl border relative transition hover:shadow-lg hover:-translate-y-1.5 duration-300">
       <div className="absolute top-4 right-1 gap-2 flex flex-col">
 
         <AddToWhishlistbtn productId={product._id}/>
@@ -29,6 +29,14 @@ export default function ProductCard({ product }: ProductTypeProps) {
         </Link>
 
       </div>
+
+      {product.priceAfterDiscount && (
+        <>
+          <div className="absolute top-4 left-2 bg-red-500 rounded-md">
+            <span className="text-white text-sm p-2 ">- {Math.round( 100 - (product.priceAfterDiscount * 100) / product.price )}%</span>
+          </div>
+        </>
+      )}
 
       <Image width={200} height={200} src={product.imageCover} alt={product.title} className="w-full" />
       <p className="text-gray-500 text-xs font-medium mt-3">
@@ -59,7 +67,7 @@ export default function ProductCard({ product }: ProductTypeProps) {
         {product.priceAfterDiscount ? (
           <div className="flex items-center gap-2.5">
             <h4 className="text-xl text-emerald-600 font-extrabold mt-3">
-              {product.price} EGP
+              {product.priceAfterDiscount} EGP
             </h4>
             <h4 className="text-sm text-gray-500 line-through font-medium mt-5">
               {product.price} EGP

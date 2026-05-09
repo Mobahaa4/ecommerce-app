@@ -15,7 +15,7 @@ export default function Footer() {
         <div className='mt-10'>
             <div className='bg-emerald-50'>
                 <div className='md:container md:mx-auto md:w-10/12'>
-                    <div className='p-5 md:grid md:grid-cols-4 grid grid-cols-2 gap-4'>
+                    <div className='py-5 px-2 md:grid md:grid-cols-4 grid grid-cols-2 gap-4'>
                         <div>
                             <div className='flex gap-3'>
                                 <div className='bg-emerald-100 rounded-lg w-12 h-12 flex justify-center items-center'>

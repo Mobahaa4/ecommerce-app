@@ -1,20 +1,23 @@
 
+import AddToCartbtnFromProductPage from '@/app/_components/AddToCartbtnFromProductPage'
 import { Button } from '@/components/ui/button'
 import { getProductById } from '@/Services/Products'
 import React from 'react'
-import { FaShoppingCart } from 'react-icons/fa'
-import { FaHeart, FaStar } from 'react-icons/fa6'
+import {  FaStar } from 'react-icons/fa6'
+import { IoShareSocial } from 'react-icons/io5'
 import { MdOutlineElectricBolt } from 'react-icons/md'
 
 export default async function page({params}: { params: { id: string } } ) {
 
     const myParams = await params
     const singleProduct = await getProductById(myParams.id)
+    console.log(singleProduct)
     
     return (
         <div className='container mx-auto mt-5 md:grid md:grid-cols-4 lg:grid-cols-4 gap-10'>
             <div className=' md:col-span-1 p-4 border md:mb-0 rounded-xl mb-3'>
                 <img className='w-full' src={singleProduct?.imageCover} alt={singleProduct?.title} />
+                
             </div>
             <div className='md:col-span-3 p-4 border rounded-xl'>
                 <div className='flex gap-2'>
@@ -53,31 +56,24 @@ export default async function page({params}: { params: { id: string } } ) {
                 ) : (
                 <h4 className="text-3xl font-extrabold my-5">{singleProduct?.price} EGP</h4>
                 )}
-                <p className='mt-7 text-gray-600 text-lg font-medium'>{singleProduct?.description}</p>
+                <p className='my-5 text-gray-600 text-lg font-medium'>{singleProduct?.description}</p>
 
                 <div className='flex flex-col md:flex-row justify-center items-center gap-3'>
-                    <Button className='flex items-center w-full md:w-1/2 text-lg py-6 mt-5 font-medium text-white bg-emerald-600'> <FaShoppingCart /> Add to Cart</Button>
-                    <Button className='flex items-center w-full md:w-1/2 text-lg py-6 md:mt-5 font-medium text-white'> <MdOutlineElectricBolt /> Buy Now</Button>
+                    {singleProduct?._id && (
+                        <AddToCartbtnFromProductPage productId={singleProduct._id} />
+                    )}
+                    <Button className='flex items-center w-full md:w-1/2 text-lg py-6 md:mt-5 font-medium text-white cursor-pointer'> <MdOutlineElectricBolt /> Buy Now</Button>
                 </div>
 
                 <div className='flex justify-center items-center gap-3'>
-                    <Button className='flex items-center w-10/12 md:w-11/12 text-lg py-4 md:py-6 mt-6 font-medium text-black bg-white border-gray-200 border'> <FaHeart /> Add to Whislist</Button>
-                    <Button className='flex items-center w-2/12 md:w-1/12 text-lg py-4 md:py-6 mt-6 font-medium text-white'> <MdOutlineElectricBolt /> </Button>
+                    {singleProduct?._id && (
+                        <AddToCartbtnFromProductPage productId={singleProduct?._id} />
+                    )}
+                    <Button className='flex items-center w-2/12 md:w-1/12 text-lg p-5 mt-6 font-medium text-gray-900 cursor-pointer bg-white border border-gray-400'> 
+                    <IoShareSocial /> </Button>
                 </div>
 
-
-
-
-
-
-
-
-
             </div>
-
-            
-
-
         </div>
     )
 }
